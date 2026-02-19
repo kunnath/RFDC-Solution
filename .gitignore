@@ -1,0 +1,39 @@
+
+# Virtual environments
+.venv/
+
+# Node
+node_modules/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Build / distribution
+dist/
+build/
+*.egg-info/
+
+# IDEs and editors
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+
+# Test / coverage
+.pytest_cache/
+coverage/
+
+# Environment files
+.env
+
+# Large binaries / archives
+*.zip
+*.tar.gz
+*.tgz
+*.exe
+*.dll
+*.so
+
