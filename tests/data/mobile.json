@@ -1,0 +1,8 @@
+{
+  "desired_caps": {
+    "platformName": "Android",
+    "deviceName": "emulator-5554",
+    "app": "/path/to/app.apk"
+  },
+  "element_id": "login_button"
+}

@@ -1,0 +1,10 @@
+stages:
+  - test
+
+robot_tests:
+  stage: test
+  image: python:3.10
+  script:
+    - pip install robotframework paho-mqtt confluent-kafka requests playwright appium-python-client pyserial
+    - playwright install
+    - robot tests/

@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                sh 'pip install robotframework paho-mqtt confluent-kafka requests playwright appium-python-client pyserial'
+                sh 'playwright install'
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                sh 'robot tests/'
+            }
+        }
+    }
+}

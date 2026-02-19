@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.1 (Python 3.9.6 on darwin)" generated="2026-02-19T14:22:40.663343" rpa="false" schemaversion="5">
+<suite id="s1" name="Mobile Test" source="/Users/kunnath/projects/rfdc-framework/tests/mobile_test.robot">
+<test id="s1-t1" name="Open Mobile Browser And Click" line="5">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-02-19T14:22:40.749455" level="INFO">${caps} = {'platformName': 'Android', 'deviceName': 'emulator-5554', 'automationName': 'UiAutomator2', 'browserName': 'Chrome'}</msg>
+<var>${caps}</var>
+<arg>platformName=Android</arg>
+<arg>deviceName=emulator-5554</arg>
+<arg>automationName=UiAutomator2</arg>
+<arg>browserName=Chrome</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-02-19T14:22:40.749166" elapsed="0.000307"/>
+</kw>
+<kw name="Start Session" owner="MobileAppiumLibrary">
+<arg>${caps}</arg>
+<status status="PASS" start="2026-02-19T14:22:40.749558" elapsed="7.386860"/>
+</kw>
+<kw name="Go To" owner="MobileAppiumLibrary">
+<arg>https://www.google.com</arg>
+<status status="PASS" start="2026-02-19T14:22:48.137061" elapsed="0.836319"/>
+</kw>
+<kw name="Click" owner="MobileAppiumLibrary">
+<arg>xpath=//a</arg>
+<status status="PASS" start="2026-02-19T14:22:48.973627" elapsed="0.418650"/>
+</kw>
+<kw name="Close Session" owner="MobileAppiumLibrary">
+<status status="PASS" start="2026-02-19T14:22:49.392535" elapsed="0.221105"/>
+</kw>
+<status status="PASS" start="2026-02-19T14:22:40.748770" elapsed="8.865144"/>
+</test>
+<status status="PASS" start="2026-02-19T14:22:40.663965" elapsed="8.950331"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Mobile Test" id="s1" pass="1" fail="0" skip="0">Mobile Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

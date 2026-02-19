@@ -1,0 +1,5 @@
+{
+  "get_url": "https://jsonplaceholder.typicode.com/posts/1",
+  "post_url": "https://jsonplaceholder.typicode.com/posts",
+  "post_data": { "title": "foo", "body": "bar", "userId": 1 }
+}

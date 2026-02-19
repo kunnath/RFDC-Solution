@@ -1,0 +1,6 @@
+{
+  "host": "localhost",
+  "port": 1883,
+  "topic": "test/topic",
+  "payload": "Hello MQTT"
+}
