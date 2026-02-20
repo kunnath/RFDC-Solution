@@ -2,6 +2,8 @@ RFDC Framework
 
 ![RFDC Demo](images/demo.png)
 
+[text](https://www.youtube.com/watch?v=Q9i8wykOJiM)
+
 RFDC is a modular Robot Framework-based automation platform focused on device and cloud integrations. It provides reusable custom libraries, sample suites, and an AI-based MCP (Model Context Protocol) server to assist with test intent interpretation, self-healing, and remediation suggestions. The project is designed to integrate into CI/CD pipelines (GitHub Actions, GitLab CI, Jenkins).
 
 **Components:**
