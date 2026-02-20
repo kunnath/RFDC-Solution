@@ -1,0 +1,14 @@
+tunnel: <TUNNEL-UUID>
+credentials-file: /Users/<your-user>/.cloudflared/<TUNNEL-UUID>.json
+ingress:
+  # Route API requests to the backend (port 5000)
+  - hostname: app.example.com
+    path: /api/*
+    service: http://localhost:5000
+
+  # All other requests go to the frontend (port 3000)
+  - hostname: app.example.com
+    service: http://localhost:3000
+
+  # Fallback
+  - service: http_status:404
