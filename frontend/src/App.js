@@ -5,13 +5,13 @@ import ErrorBoundary from './ErrorBoundary';
 import './App.css';
 
 const layers = [
-  { value: 'MQTT', label: 'MQTT' },
-  { value: 'Kafka', label: 'Kafka' },
-  { value: 'REST', label: 'REST APIs' },
-  { value: 'DB', label: 'Database' },
-  { value: 'UI', label: 'UI (Playwright)' },
-  { value: 'Mobile', label: 'Mobile (Appium)' },
-  { value: 'Firmware', label: 'Firmware' }
+  { value: 'MQTT', label: 'MQTT', icon: '📡' },
+  { value: 'Kafka', label: 'Kafka', icon: '🔁' },
+  { value: 'REST', label: 'REST APIs', icon: '🌐' },
+  { value: 'DB', label: 'Database', icon: '🗄️' },
+  { value: 'UI', label: 'UI (Playwright)', icon: '🖥️' },
+  { value: 'Mobile', label: 'Mobile (Appium)', icon: '📱' },
+  { value: 'Firmware', label: 'Firmware', icon: '⚙️' }
 ];
 
 // Allow overriding backend base via environment (REACT_APP_BACKEND_BASE).
@@ -183,10 +183,10 @@ function App() {
                 }}
                 aria-pressed={layer === l.value}
               >
-                <span className="sidebar__initials">{l.value[0]}</span>
+                <span className="sidebar__initials" aria-hidden="true">{l.icon}</span>
                 <span className="sidebar__label" aria-hidden="true">{l.label}</span>
               </button>
-            ))}
+            ))} 
           </nav>
           <button
             title="Browse tests"
@@ -198,7 +198,7 @@ function App() {
             }}
             aria-pressed={showFiles}
           >
-            <span className="sidebar__initials">T</span>
+            <span className="sidebar__initials" aria-hidden="true">🧪</span>
             <span className="sidebar__label" aria-hidden="true">Tests</span>
           </button>
         </aside>
