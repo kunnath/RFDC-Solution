@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "start:public": "HOST=0.0.0.0 DANGEROUSLY_DISABLE_HOST_CHECK=true react-scripts start"
   },
   "proxy": "http://localhost:5000",
   "dependencies": {

@@ -20,6 +20,9 @@ const reportsDir = path.join(__dirname, 'reports');
 if (!fs.existsSync(reportsDir)) fs.mkdirSync(reportsDir, { recursive: true });
 app.use('/reports', express.static(reportsDir));
 
+// root -> health (helpful when exposing root via a tunnel)
+app.get('/', (req, res) => res.redirect('/health'));
+
 // simple health endpoint
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
@@ -62,6 +65,28 @@ app.get('/health/kafka', async (req, res) => {
     return res.status(503).json({ status: 'unreachable', bootstrap: `${host}:${portNum}` });
   } catch (err) {
     return res.status(500).json({ error: 'kafka-health-error', details: err.message });
+  }
+});
+
+// List files under /tests (used by frontend test browser)
+app.get('/list-tests', (req, res) => {
+  try {
+    const testsDir = path.join(projectRoot, 'tests');
+    if (!fs.existsSync(testsDir)) return res.status(404).json({ error: 'tests-folder-not-found' });
+
+    const build = (dir, rel) => {
+      return fs.readdirSync(dir, { withFileTypes: true }).sort((a,b) => a.name.localeCompare(b.name)).map(ent => {
+        const abs = path.join(dir, ent.name);
+        const relPath = path.posix.join(rel, ent.name);
+        if (ent.isDirectory()) return { name: ent.name, path: relPath, isDir: true, children: build(abs, relPath) };
+        return { name: ent.name, path: relPath, isDir: false };
+      });
+    };
+
+    const tree = { name: 'tests', path: '/tests', isDir: true, children: build(testsDir, '/tests') };
+    return res.json(tree);
+  } catch (err) {
+    return res.status(500).json({ error: 'list-tests-failed', details: err.message });
   }
 });
 

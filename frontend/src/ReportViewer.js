@@ -39,7 +39,7 @@ function ReportViewer({ reportUrl, result, running }) {
           <div style={{ color: '#64748b', fontSize: 13 }}>No report available yet. Run an automation to view results.</div>
         </div>
         <div style={{ flex: 1 }}>
-          <div style={{ background: '#fff', borderRadius: 8, padding: 12, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+          <div className="report-card">
             <div style={{ fontWeight: 700, marginBottom: 6 }}>Run History</div>
             <div style={{ color: '#64748b', fontSize: 13 }}>No runs yet. After you click "Run Automation", this panel will show execution logs and the generated report.</div>
           </div>
@@ -65,7 +65,7 @@ function ReportViewer({ reportUrl, result, running }) {
       </div>
 
       <div style={{ display: 'flex', gap: 12 }}>
-        <div style={{ width: 320, minWidth: 220, background: '#fff', borderRadius: 8, padding: 12, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
+        <div style={{ width: 320, minWidth: 220 }} className="report-card">
           <h4 style={{ margin: '0 0 8px 0' }}>Run Summary</h4>
           {result ? (
             <div style={{ fontSize: 13, color: '#334155' }}>

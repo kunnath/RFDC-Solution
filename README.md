@@ -75,3 +75,9 @@ Roadmap:
 - Add CI/CD pipelines and example workflows
 
 For developer notes and longer documentation see `PROJECT_DOC.md` and `copilot-instructions.md`.
+
+
+
+ /Users/kunnath/Android/Sdk/emulator/emulator -avd rfdc_avd
+
+ appium -p 4725

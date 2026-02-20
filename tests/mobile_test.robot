@@ -2,9 +2,11 @@
 Library    ../libraries/MobileAppiumLibrary.py
 
 *** Test Cases ***
-Open Mobile Browser And Click
+Open Mobile Browser And Click AI Mode
     ${caps}=    Create Dictionary    platformName=Android    deviceName=emulator-5554    automationName=UiAutomator2    browserName=Chrome
     Start Session    ${caps}
     Go To    https://www.google.com
-    Click    xpath=//a
+    Sleep    2s
+    # Click the 'Bilder' (Images) menu
+    Click    xpath=//a[normalize-space(.)='Bilder']
     Close Session
