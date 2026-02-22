@@ -11,7 +11,7 @@ RFDC is a modular Robot Framework-based automation platform focused on device an
 - **Libraries:** Custom Robot Framework libraries for DB, MQTT, Kafka, REST, Firmware, UI (Playwright), and Mobile (Appium) located in the `libraries/` folder.
 - **Tests:** Example Robot Framework suites in `tests/` exercising each domain.
 - **MCP Server:** AI layer in `mcp-server/` for interpreting high-level test intents and providing recommendations.
-- **Frontend / Backend:** Small UI and API server under `frontend/` and `backend/` for viewing reports and interacting with MCP features.
+- **Frontend / Backend:** Small UI and API server under `frontend/` and `backend/` for viewing reports and interacting with MCP features.  The web UI includes an "Automation Configuration" panel; selecting the **UI (Playwright)** layer exposes two new options – a **Browser** selector (Chromium, Firefox or WebKit) and a **Browser Mode** dropdown (headed vs headless).  Both values are forwarded as Robot variables (`UI_BROWSER` and `UI_HEADLESS`) and used by the custom Playwright library to control which engine is started and whether the browser window is shown.
 
 **Directory Layout:**
 - `libraries/` — custom library modules

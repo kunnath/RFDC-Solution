@@ -275,6 +275,21 @@ app.post('/run-layer', (req, res) => {
     args.push('--variable', `TEST_DATA:${testData}`);
   }
 
+  // for UI layer allow mode selection (headless vs headed) and browser name
+  if (layerKey === 'ui') {
+    if (typeof req.body.uiHeadless !== 'undefined') {
+      const val = !!req.body.uiHeadless;
+      args.push('--variable', `UI_HEADLESS:${val}`);
+    }
+    if (typeof req.body.uiBrowser === 'string' && req.body.uiBrowser) {
+      const browser = req.body.uiBrowser.toString().toLowerCase();
+      // restrict to known values
+      if (['chromium','firefox','webkit'].includes(browser)) {
+        args.push('--variable', `UI_BROWSER:${browser}`);
+      }
+    }
+  }
+
     // For mock flags and other variables, ensure they come BEFORE the test data source
     if (useMockKafka) {
       args.push('--variable', `KAFKA_MOCK:True`);
@@ -286,6 +301,7 @@ app.post('/run-layer', (req, res) => {
     // run Robot Framework via wrapper script in /scripts/run_robot.sh
   try {
     const runner = path.join(projectRoot, 'scripts', 'run_robot.sh');
+    console.log('run-layer: executing robot with args', args);
     let proc = spawnSync('bash', [runner, ...args], { encoding: 'utf8' });
     if (proc.error) {
       // If wrapper couldn't be executed, return mock report

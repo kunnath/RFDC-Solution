@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.1 (Python 3.9.6 on darwin)" generated="2026-02-22T18:57:47.813929" rpa="false" schemaversion="5">
+<suite id="s1" name="Db Test" source="/Users/kunnath/projects/rfdc-framework/tests/db_test.robot">
+<test id="s1-t1" name="Execute Query Test" line="5">
+<kw name="Execute Query" owner="DBLibrary">
+<msg time="2026-02-22T18:57:47.839526" level="INFO">${result} = [('3.51.0',)]</msg>
+<var>${result}</var>
+<arg>SELECT sqlite_version();</arg>
+<status status="PASS" start="2026-02-22T18:57:47.839294" elapsed="0.000250"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-02-22T18:57:47.839774" level="INFO">Length is 1.</msg>
+<arg>${result}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-02-22T18:57:47.839600" elapsed="0.000197"/>
+</kw>
+<kw name="Close" owner="DBLibrary">
+<status status="PASS" start="2026-02-22T18:57:47.839838" elapsed="0.000049"/>
+</kw>
+<status status="PASS" start="2026-02-22T18:57:47.838947" elapsed="0.000986"/>
+</test>
+<status status="PASS" start="2026-02-22T18:57:47.814757" elapsed="0.025331"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Db Test" id="s1" pass="1" fail="0" skip="0">Db Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

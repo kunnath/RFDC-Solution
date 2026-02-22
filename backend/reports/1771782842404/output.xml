@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.1 (Python 3.9.6 on darwin)" generated="2026-02-22T18:54:02.554479" rpa="false" schemaversion="5">
+<suite id="s1" name="Mobile Test" source="/Users/kunnath/projects/rfdc-framework/tests/mobile_test.robot">
+<test id="s1-t1" name="Open Mobile Browser And Click AI Mode" line="5">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-02-22T18:54:02.643307" level="INFO">${caps} = {'platformName': 'Android', 'deviceName': 'emulator-5554', 'automationName': 'UiAutomator2', 'browserName': 'Chrome'}</msg>
+<var>${caps}</var>
+<arg>platformName=Android</arg>
+<arg>deviceName=emulator-5554</arg>
+<arg>automationName=UiAutomator2</arg>
+<arg>browserName=Chrome</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-02-22T18:54:02.643049" elapsed="0.000279"/>
+</kw>
+<kw name="Start Session" owner="MobileAppiumLibrary">
+<msg time="2026-02-22T18:54:02.668813" level="WARN">Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='localhost', port=4723): Failed to establish a new connection: [Errno 61] Connection refused")': /session</msg>
+<msg time="2026-02-22T18:54:02.669408" level="WARN">Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='localhost', port=4723): Failed to establish a new connection: [Errno 61] Connection refused")': /session</msg>
+<msg time="2026-02-22T18:54:02.669812" level="WARN">Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='localhost', port=4723): Failed to establish a new connection: [Errno 61] Connection refused")': /session</msg>
+<msg time="2026-02-22T18:54:02.670274" level="FAIL">Failed to start Appium session. Attempts:
+options: HTTPConnectionPool(host='localhost', port=4723): Max retries exceeded with url: /session (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4723): Failed to establish a new connection: [Errno 61] Connection refused"))</msg>
+<arg>${caps}</arg>
+<status status="FAIL" start="2026-02-22T18:54:02.643389" elapsed="0.027845">Failed to start Appium session. Attempts:
+options: HTTPConnectionPool(host='localhost', port=4723): Max retries exceeded with url: /session (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4723): Failed to establish a new connection: [Errno 61] Connection refused"))</status>
+</kw>
+<kw name="Go To" owner="MobileAppiumLibrary">
+<arg>https://www.google.com</arg>
+<status status="NOT RUN" start="2026-02-22T18:54:02.671351" elapsed="0.000017"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" start="2026-02-22T18:54:02.671410" elapsed="0.000008"/>
+</kw>
+<kw name="Click" owner="MobileAppiumLibrary">
+<arg>xpath=//a[normalize-space(.)='Bilder']</arg>
+<status status="NOT RUN" start="2026-02-22T18:54:02.671453" elapsed="0.000007"/>
+</kw>
+<kw name="Close Session" owner="MobileAppiumLibrary">
+<status status="NOT RUN" start="2026-02-22T18:54:02.671491" elapsed="0.000007"/>
+</kw>
+<status status="FAIL" start="2026-02-22T18:54:02.642693" elapsed="0.028889">Failed to start Appium session. Attempts:
+options: HTTPConnectionPool(host='localhost', port=4723): Max retries exceeded with url: /session (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4723): Failed to establish a new connection: [Errno 61] Connection refused"))</status>
+</test>
+<status status="FAIL" start="2026-02-22T18:54:02.555127" elapsed="0.116643"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Mobile Test" id="s1" pass="0" fail="1" skip="0">Mobile Test</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2026-02-22T18:54:02.668813" level="WARN">Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='localhost', port=4723): Failed to establish a new connection: [Errno 61] Connection refused")': /session</msg>
+<msg time="2026-02-22T18:54:02.669408" level="WARN">Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='localhost', port=4723): Failed to establish a new connection: [Errno 61] Connection refused")': /session</msg>
+<msg time="2026-02-22T18:54:02.669812" level="WARN">Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='localhost', port=4723): Failed to establish a new connection: [Errno 61] Connection refused")': /session</msg>
+</errors>
+</robot>

@@ -38,6 +38,8 @@ function App() {
   const [testFilename, setTestFilename] = useState(defaultTests['MQTT']);
   const [dataFilePath, setDataFilePath] = useState('');
   const [forceMock, setForceMock] = useState(false);
+  const [uiHeadless, setUiHeadless] = useState(false); // true=headless, false=headed (default to headed so users see a browser when starting)
+  const [uiBrowser, setUiBrowser] = useState('chromium'); // chromium, firefox, webkit
   const [result, setResult] = useState(null);
   const [reportUrl, setReportUrl] = useState('');
   const [running, setRunning] = useState(false);
@@ -138,6 +140,11 @@ function App() {
       const body = { layer, testName, testFilename, dataFilePath };
       // allow forcing mock for Kafka from the UI
       if (layer === 'Kafka' && forceMock) body.mock = true;
+      // for UI layer include browser mode & browser name
+      if (layer === 'UI') {
+        body.uiHeadless = uiHeadless; // boolean
+        body.uiBrowser = uiBrowser; // string
+      }
       const res = await axios.post(`${BACKEND_BASE}/run-layer`, body, { timeout: 120000 });
       setResult(res.data);
       if (res.data.reportUrl) setReportUrl(`${BACKEND_BASE}${res.data.reportUrl}`);
@@ -180,6 +187,10 @@ function App() {
                   setTestFilename(defaultTests[v] || '');
                   if (v === 'Mobile') setDataFilePath('/tests/data/mobile.json');
                   else setDataFilePath('');
+                  if (v === 'UI') {
+                    setUiHeadless(false); // default to headed when switching to UI
+                    setUiBrowser('chromium');
+                  }
                 }}
                 aria-pressed={layer === l.value}
               >
@@ -267,7 +278,7 @@ function App() {
                 ))}
               </select>
             </div>
-
+            
             <div className="control-row">
               <label className="label">Test Name:</label>
               <input
@@ -297,6 +308,34 @@ function App() {
                 className="input"
               />
             </div>
+
+            {layer === 'UI' && (
+              <>
+                <div className="control-row">
+                  <label className="label">Browser:</label>
+                  <select
+                    value={uiBrowser}
+                    onChange={e => setUiBrowser(e.target.value)}
+                    className="input"
+                  >
+                    <option value="chromium">Chromium</option>
+                    <option value="firefox">Firefox</option>
+                    <option value="webkit">WebKit</option>
+                  </select>
+                </div>
+                <div className="control-row">
+                  <label className="label">Browser Mode:</label>
+                  <select
+                    value={uiHeadless ? 'headless' : 'headed'}
+                    onChange={e => setUiHeadless(e.target.value === 'headless')}
+                    className="input"
+                  >
+                    <option value="headless">Headless</option>
+                    <option value="headed">Headed</option>
+                  </select>
+                </div>
+              </>
+            )}
 
             {layer === 'Kafka' && (
               <div className="control-row">
