@@ -82,6 +82,13 @@ pipeline {
 
     post {
         always {
+            // publish Robot Framework results using the Jenkins Robot plugin
+            // this generates a consolidated report in the build results
+            robot outputPath: 'reports',
+                  reportFileName: 'report.html',
+                  logFileName: 'log.html',
+                  outputFileName: 'output.xml'
+
             archiveArtifacts artifacts: 'reports/**/log.html, reports/**/output.xml, reports/**/report.html', fingerprint: true
             junit allowEmptyResults: true, testResults: 'reports/**/*.xml'
         }
