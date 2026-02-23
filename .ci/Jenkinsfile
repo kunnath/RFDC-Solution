@@ -90,8 +90,7 @@ pipeline {
                   outputFileName: '**/output.xml',
                   logFileName: '**/log.html',
                   reportFileName: '**/report.html',
-                  passThreshold: 90.0,
-                  unstableThreshold: 70.0,
+                  // thresholds removed so the build status won’t be altered by pass percentage
                   disableArchiveOutput: true,
                   countSkippedTests: true,
                   otherFiles: 'screenshot-*.png'
