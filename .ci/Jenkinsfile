@@ -1,19 +1,20 @@
 pipeline {
-    agent {
-        dockerfile {
-            filename '.ci/Dockerfile'
-            label 'docker'
-            args '-u root:root' // ensure tools installed as root are usable
-        }
-    }
+    /* run on any node – if you are using the Kubernetes/ Docker 
+       plugin you can replace this with an explicit container block */
+    agent any
+
     options {
         // keep builds for a week
         buildDiscarder(logRotator(daysToKeepStr: '7'))
         timestamps()
     }
+
     parameters {
-        choice(name: 'LAYER', choices: ['all','db','firmware','kafka','mobile','mqtt','rest','ui'], description: 'Which test layer to execute')
+        choice(name: 'LAYER',
+               choices: ['all','db','firmware','kafka','mobile','mqtt','rest','ui'],
+               description: 'Which test layer to execute')
     }
+
     stages {
         stage('DB Tests') {
             when {
@@ -23,6 +24,7 @@ pipeline {
                 sh 'robot --outputdir reports/db tests/db_test.robot'
             }
         }
+
         stage('Firmware Tests') {
             when {
                 expression { params.LAYER == 'all' || params.LAYER == 'firmware' }
@@ -31,6 +33,7 @@ pipeline {
                 sh 'robot --outputdir reports/firmware tests/firmware_test.robot'
             }
         }
+
         stage('Kafka Tests') {
             when {
                 expression { params.LAYER == 'all' || params.LAYER == 'kafka' }
@@ -39,6 +42,7 @@ pipeline {
                 sh 'robot --outputdir reports/kafka tests/kafka_test.robot'
             }
         }
+
         stage('Mobile Tests') {
             when {
                 expression { params.LAYER == 'all' || params.LAYER == 'mobile' }
@@ -47,6 +51,7 @@ pipeline {
                 sh 'robot --outputdir reports/mobile tests/mobile_test.robot'
             }
         }
+
         stage('MQTT Tests') {
             when {
                 expression { params.LAYER == 'all' || params.LAYER == 'mqtt' }
@@ -55,6 +60,7 @@ pipeline {
                 sh 'robot --outputdir reports/mqtt tests/mqtt_test.robot'
             }
         }
+
         stage('REST Tests') {
             when {
                 expression { params.LAYER == 'all' || params.LAYER == 'rest' }
@@ -63,6 +69,7 @@ pipeline {
                 sh 'robot --outputdir reports/rest tests/rest_test.robot'
             }
         }
+
         stage('UI Tests') {
             when {
                 expression { params.LAYER == 'all' || params.LAYER == 'ui' }
@@ -72,6 +79,7 @@ pipeline {
             }
         }
     }
+
     post {
         always {
             archiveArtifacts artifacts: 'reports/**/log.html, reports/**/output.xml, reports/**/report.html', fingerprint: true
