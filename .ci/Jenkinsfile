@@ -97,7 +97,8 @@ pipeline {
                   otherFiles: 'screenshot-*.png'
 
             archiveArtifacts artifacts: 'reports/**/log.html, reports/**/output.xml, reports/**/report.html', fingerprint: true
-            junit allowEmptyResults: true, testResults: 'reports/**/*.xml'
+            // junit step removed: Robot Framework output.xml is not JUnit format and was causing build failures
+            // Jenkins Robot plugin already publishes results, no need for junit parser
         }
     }
 }
