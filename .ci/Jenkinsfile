@@ -83,11 +83,17 @@ pipeline {
     post {
         always {
             // publish Robot Framework results using the Jenkins Robot plugin
-            // this generates a consolidated report in the build results
+            // use wildcards so files nested in layer subfolders are located
+            // and apply thresholds similar to the provided example
             robot outputPath: 'reports',
-                  reportFileName: 'report.html',
-                  logFileName: 'log.html',
-                  outputFileName: 'output.xml'
+                  outputFileName: '**/output.xml',
+                  logFileName: '**/log.html',
+                  reportFileName: '**/report.html',
+                  passThreshold: 90.0,
+                  unstableThreshold: 70.0,
+                  disableArchiveOutput: true,
+                  countSkippedTests: true,
+                  otherFiles: 'screenshot-*.png'
 
             archiveArtifacts artifacts: 'reports/**/log.html, reports/**/output.xml, reports/**/report.html', fingerprint: true
             junit allowEmptyResults: true, testResults: 'reports/**/*.xml'
