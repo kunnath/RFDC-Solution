@@ -1,5 +1,11 @@
 pipeline {
-    agent any
+    agent {
+        dockerfile {
+            filename '.ci/Dockerfile'
+            label 'docker'
+            args '-u root:root' // ensure tools installed as root are usable
+        }
+    }
     options {
         // keep builds for a week
         buildDiscarder(logRotator(daysToKeepStr: '7'))
@@ -9,15 +15,6 @@ pipeline {
         choice(name: 'LAYER', choices: ['all','db','firmware','kafka','mobile','mqtt','rest','ui'], description: 'Which test layer to execute')
     }
     stages {
-        stage('Install Dependencies') {
-            steps {
-                sh '''
-                    pip install --upgrade robotframework paho-mqtt confluent-kafka requests \
-                        playwright appium-python-client pyserial
-                    playwright install
-                '''
-            }
-        }
         stage('DB Tests') {
             when {
                 expression { params.LAYER == 'all' || params.LAYER == 'db' }
