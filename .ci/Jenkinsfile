@@ -21,7 +21,8 @@ pipeline {
                 expression { params.LAYER == 'all' || params.LAYER == 'db' }
             }
             steps {
-                sh 'robot --outputdir reports/db tests/db_test.robot'
+                // --nostatusrc prevents non-zero exit on test failures; publisher will handle build result
+                sh 'robot --nostatusrc --outputdir reports/db tests/db_test.robot'
             }
         }
 
@@ -30,7 +31,7 @@ pipeline {
                 expression { params.LAYER == 'all' || params.LAYER == 'firmware' }
             }
             steps {
-                sh 'robot --outputdir reports/firmware tests/firmware_test.robot'
+                sh 'robot --nostatusrc --outputdir reports/firmware tests/firmware_test.robot'
             }
         }
 
@@ -39,7 +40,7 @@ pipeline {
                 expression { params.LAYER == 'all' || params.LAYER == 'kafka' }
             }
             steps {
-                sh 'robot --outputdir reports/kafka tests/kafka_test.robot'
+                sh 'robot --nostatusrc --outputdir reports/kafka tests/kafka_test.robot'
             }
         }
 
@@ -48,7 +49,7 @@ pipeline {
                 expression { params.LAYER == 'all' || params.LAYER == 'mobile' }
             }
             steps {
-                sh 'robot --outputdir reports/mobile tests/mobile_test.robot'
+                sh 'robot --nostatusrc --outputdir reports/mobile tests/mobile_test.robot'
             }
         }
 
@@ -57,7 +58,7 @@ pipeline {
                 expression { params.LAYER == 'all' || params.LAYER == 'mqtt' }
             }
             steps {
-                sh 'robot --outputdir reports/mqtt tests/mqtt_test.robot'
+                sh 'robot --nostatusrc --outputdir reports/mqtt tests/mqtt_test.robot'
             }
         }
 
@@ -66,7 +67,7 @@ pipeline {
                 expression { params.LAYER == 'all' || params.LAYER == 'rest' }
             }
             steps {
-                sh 'robot --outputdir reports/rest tests/rest_test.robot'
+                sh 'robot --nostatusrc --outputdir reports/rest tests/rest_test.robot'
             }
         }
 
@@ -75,7 +76,7 @@ pipeline {
                 expression { params.LAYER == 'all' || params.LAYER == 'ui' }
             }
             steps {
-                sh 'robot --outputdir reports/ui tests/ui_test.robot'
+                sh 'robot --nostatusrc --outputdir reports/ui tests/ui_test.robot'
             }
         }
     }
