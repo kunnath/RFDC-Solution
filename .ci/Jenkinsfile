@@ -1,16 +1,84 @@
 pipeline {
     agent any
+    options {
+        // keep builds for a week
+        buildDiscarder(logRotator(daysToKeepStr: '7'))
+        timestamps()
+    }
+    parameters {
+        choice(name: 'LAYER', choices: ['all','db','firmware','kafka','mobile','mqtt','rest','ui'], description: 'Which test layer to execute')
+    }
     stages {
         stage('Install Dependencies') {
             steps {
-                sh 'pip install robotframework paho-mqtt confluent-kafka requests playwright appium-python-client pyserial'
-                sh 'playwright install'
+                sh '''
+                    pip install --upgrade robotframework paho-mqtt confluent-kafka requests \
+                        playwright appium-python-client pyserial
+                    playwright install
+                '''
             }
         }
-        stage('Run Tests') {
-            steps {
-                sh 'robot tests/'
+        stage('DB Tests') {
+            when {
+                expression { params.LAYER == 'all' || params.LAYER == 'db' }
             }
+            steps {
+                sh 'robot --outputdir reports/db tests/db_test.robot'
+            }
+        }
+        stage('Firmware Tests') {
+            when {
+                expression { params.LAYER == 'all' || params.LAYER == 'firmware' }
+            }
+            steps {
+                sh 'robot --outputdir reports/firmware tests/firmware_test.robot'
+            }
+        }
+        stage('Kafka Tests') {
+            when {
+                expression { params.LAYER == 'all' || params.LAYER == 'kafka' }
+            }
+            steps {
+                sh 'robot --outputdir reports/kafka tests/kafka_test.robot'
+            }
+        }
+        stage('Mobile Tests') {
+            when {
+                expression { params.LAYER == 'all' || params.LAYER == 'mobile' }
+            }
+            steps {
+                sh 'robot --outputdir reports/mobile tests/mobile_test.robot'
+            }
+        }
+        stage('MQTT Tests') {
+            when {
+                expression { params.LAYER == 'all' || params.LAYER == 'mqtt' }
+            }
+            steps {
+                sh 'robot --outputdir reports/mqtt tests/mqtt_test.robot'
+            }
+        }
+        stage('REST Tests') {
+            when {
+                expression { params.LAYER == 'all' || params.LAYER == 'rest' }
+            }
+            steps {
+                sh 'robot --outputdir reports/rest tests/rest_test.robot'
+            }
+        }
+        stage('UI Tests') {
+            when {
+                expression { params.LAYER == 'all' || params.LAYER == 'ui' }
+            }
+            steps {
+                sh 'robot --outputdir reports/ui tests/ui_test.robot'
+            }
+        }
+    }
+    post {
+        always {
+            archiveArtifacts artifacts: 'reports/**/log.html, reports/**/output.xml, reports/**/report.html', fingerprint: true
+            junit allowEmptyResults: true, testResults: 'reports/**/*.xml'
         }
     }
 }
